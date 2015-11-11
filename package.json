@@ -1,0 +1,19 @@
+{
+  "name": "animate-server",
+  "version": "1.0.0",
+  "description": "Chat realtime con video y gifs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sharmaz/animate-server.git"
+  },
+  "author": "Ivan Robles <irae45@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Sharmaz/animate-server/issues"
+  },
+  "homepage": "https://github.com/Sharmaz/animate-server"
+}
