@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Sharmaz/animate-server/issues"
   },
-  "homepage": "https://github.com/Sharmaz/animate-server"
+  "homepage": "https://github.com/Sharmaz/animate-server",
+  "dependencies": {
+    "st": "^1.0.0"
+  }
 }
