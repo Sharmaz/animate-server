@@ -4,7 +4,9 @@
   "description": "Chat realtime con video y gifs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-js": "browserify client/app.js -o public/app.js",
+    "postinstall": "npm run build-js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
   },
   "homepage": "https://github.com/Sharmaz/animate-server",
   "dependencies": {
+    "course": "0.0.1",
     "st": "^1.0.0",
     "webrtc2images": "^1.4.4"
   },
