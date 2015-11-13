@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/Sharmaz/animate-server",
   "dependencies": {
+    "body": "^5.1.0",
     "course": "0.0.1",
     "st": "^1.0.0",
-    "webrtc2images": "^1.4.4"
+    "webrtc2images": "^1.4.4",
+    "xhr": "^2.2.0"
   },
   "devDependencies": {
     "browserify": "^12.0.1"
