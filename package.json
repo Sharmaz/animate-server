@@ -22,7 +22,9 @@
     "async": "^1.5.0",
     "body": "^5.1.0",
     "course": "0.0.1",
+    "data-uri-to-buffer": "0.0.4",
     "st": "^1.0.0",
+    "uuid": "^2.0.1",
     "webrtc2images": "^1.4.4",
     "xhr": "^2.2.0"
   },
