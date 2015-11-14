@@ -10,10 +10,10 @@ module.exports = function (folder, filter, callback) {
 
 		let files = results.filter(filterFiles)
 
-		callback(null, file)
+		callback(null, files)
 	}
 
 	function filterFiles (file) {
-		return file,startsWith(filter)
+		return file.startsWith(filter)
 	}
 }

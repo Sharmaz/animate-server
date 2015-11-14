@@ -3,6 +3,7 @@
 const EventEmitter = require('events').EventEmitter
 const async = require('async')
 const dataURIBuffer = require('data-uri-to-buffer')
+const ffmpeg = require('./ffmpeg')
 const fs = require('fs')
 const listFiles = require('./list')
 const os = require('os')
@@ -19,7 +20,7 @@ module.exports = function (images) {
 		decodeImages,
 		createVideo,
 		encodeVideo,
-		cleanup
+		//cleanup
 		], converFinished)
 
 	function decodeImages (done) {
@@ -34,11 +35,15 @@ module.exports = function (images) {
 		ws.on('error', done)
 			.end(buffer, done)
 
-		events.emit('log', `Converting $(fileName`)
+		events.emit('log', `Converting ${fileName}`)
 	}
 
 	function createVideo (done) {
-		done()
+		ffmpeg({
+			baseName: baseName,
+			folder: tmpDir
+		}, done)
+		
 	}
 
 	function encodeVideo (done) {
@@ -51,7 +56,20 @@ module.exports = function (images) {
 		listFiles(tmpDir, baseName, function (err, files) {
 			if (err) return done(err)
 
-			// delete files
+			deleteFiles(files, done)
+		})
+	}
+
+	function deleteFiles(files, done) {
+		async.each(files, deleteFile, done)
+	}
+
+	function deleteFile(file, done) {
+		events.emit('log', `Deleting ${file}`)
+
+		fs.unlink(path.join(tmpDir, file), function(err) {
+			//ignore error
+			//
 			done()
 		})
 	}
@@ -59,7 +77,7 @@ module.exports = function (images) {
 	function converFinished (err) {
 		setTimeout(function () {
 		events.emit('video', 'this will be the encoded video')
-		}, 1000)
+		}, 500)
 	}
 
 	return events
