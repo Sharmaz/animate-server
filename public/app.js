@@ -21,6 +21,8 @@ record.addEventListener('click', function(e) {
 	e.preventDefault()
 
 	rtc.recordVideo(function(err, frames) {
+		if (err) return logError(err)
+
 		xhr({
 			uri: '/process',
 			method: 'post',
@@ -29,7 +31,14 @@ record.addEventListener('click', function(e) {
 		}, function (err, res, body) {
 			if (err) return logError(err)
 
-			console.log(JSON.parse(body))
+			body = JSON.parse(body)
+
+			if (body.video) {
+				const video = document.querySelector('#video')
+				video.src = body.video
+				video.loop = true
+				video.play()
+			}
 		})
 
 	})
