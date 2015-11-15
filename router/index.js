@@ -46,6 +46,8 @@ router.get('/users', function (req, res) {
 
 
 function onRequest (req, res) {
+	if (req.url.startsWith('/socket.io')) return
+
 	mount(req, res, function(err) {
 		if (err) return fail(err, res)
 
