@@ -1,6 +1,7 @@
+const domify = require('domify')
 const webrtc2images = require('webrtc2images')
-const record = document.querySelector('#record')
 const xhr = require('xhr')
+const messageTpl = require('./templates/message.hbs')
 
 const rtc = new webrtc2images({
 	width: 200,
@@ -12,13 +13,21 @@ const rtc = new webrtc2images({
 })
 
 rtc.startVideo(function (err) {
-
+	if (err) return logError(err)
 })
 
+const messages = document.querySelector('#messages')
+const form = document.querySelector('form')
 
-record.addEventListener('click', function(e) {
+form.addEventListener('submit', function (e) {
 	e.preventDefault()
+	record()
+}, false)
 
+function record () {
+	const input = document.querySelector('input[name="message"]')
+	const message = input.value
+	input.value = ""
 	rtc.recordVideo(function(err, frames) {
 		if (err) return logError(err)
 
@@ -33,16 +42,18 @@ record.addEventListener('click', function(e) {
 			body = JSON.parse(body)
 
 			if (body.video) {
-				const video = document.querySelector('#video')
-				video.src = body.video
-				video.loop = true
-				video.play()
+				addMessage({ message: message, video: body.video })
 			}
 		})
 
 	})
 
-}, false)
+}
+
+function addMessage (message) {
+	const m = messageTpl(message)
+	messages.appendChild(domify(m))
+}
 
 function logError (err) {
 	console.error(err)

@@ -4,7 +4,7 @@
   "description": "Chat realtime con video y gifs",
   "main": "server.js",
   "scripts": {
-    "build-js": "browserify client/app.js -o public/app.js",
+    "build-js": "browserify -t hbsfy client/app.js -o public/app.js",
     "postinstall": "npm run build-js",
     "start": "node server.js"
   },
@@ -24,12 +24,15 @@
     "concat-stream": "^1.5.1",
     "course": "0.0.1",
     "data-uri-to-buffer": "0.0.4",
+    "domify": "^1.4.0",
+    "handlebars": "^4.0.4",
     "st": "^1.0.0",
     "uuid": "^2.0.1",
     "webrtc2images": "^1.4.4",
     "xhr": "^2.2.0"
   },
   "devDependencies": {
-    "browserify": "^12.0.1"
+    "browserify": "^12.0.1",
+    "hbsfy": "^2.4.1"
   }
 }
