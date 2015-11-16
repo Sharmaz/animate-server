@@ -1,6 +1,6 @@
 'use strict'
 
-const database = require('./database')
+const database = require('../database')
 const socketio = require('socket.io')
 const helper = require('../helper')
 
