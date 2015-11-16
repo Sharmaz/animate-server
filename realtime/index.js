@@ -1,9 +1,11 @@
 'use strict'
 
+const database = require('./database')
 const socketio = require('socket.io')
 const helper = require('../helper')
 
 module.exports = function (server) {
+	const db = database()
 	const io = socketio(server)
 	io.on('connection', onConnection)
 
@@ -18,6 +20,10 @@ module.exports = function (server) {
 			converter.on('video', function (video) {
 				delete message.frames
 				message.video = video
+
+				db.save(message, function (err) {
+
+				})
 
 				socket.broadcast.emit('message', message)
 
